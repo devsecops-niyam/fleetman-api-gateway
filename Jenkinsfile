@@ -48,7 +48,7 @@ pipeline {
          }
       }
 	  
-	  stage('AcceptanceTest') {
+	  stage('SD Elements Query') {
 		steps {
         build job: 'SD Elements', wait: true
 		}

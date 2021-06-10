@@ -28,6 +28,18 @@ pipeline {
            sh 'docker image build -t ${REPOSITORY_TAG} .'
          }
       }
+	  
+	  stage('Security Scan') {
+         steps {
+            echo 'Running Security Scan'
+         }
+      }
+	  
+	  stage('Automation Tests') {
+         steps {
+            echo 'Running Automation Tests'
+         }
+      }
 
       stage('Deploy to Cluster') {
           steps {

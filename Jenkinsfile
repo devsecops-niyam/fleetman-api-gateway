@@ -17,9 +17,16 @@ pipeline {
             git credentialsId: 'GitHub', url: "https://github.com/${ORGANIZATION_NAME}/${SERVICE_NAME}"
          }
       }
+	  
       stage('Build') {
          steps {
             sh '''mvn clean package'''
+         }
+      }
+
+	  stage('Security Scan') {
+         steps {
+            echo 'Running Security Scan'
          }
       }
 
@@ -29,22 +36,16 @@ pipeline {
          }
       }
 	  
-	  stage('Security Scan') {
-         steps {
-            echo 'Running Security Scan'
-         }
+      stage('Deploy to Cluster') {
+          steps {
+                    sh 'envsubst < ${WORKSPACE}/deploy.yaml | kubectl apply -f -'
+          }
       }
 	  
 	  stage('Automation Tests') {
          steps {
             echo 'Running Automation Tests'
          }
-      }
-
-      stage('Deploy to Cluster') {
-          steps {
-                    sh 'envsubst < ${WORKSPACE}/deploy.yaml | kubectl apply -f -'
-          }
       }
    }
 }

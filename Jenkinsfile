@@ -47,6 +47,12 @@ pipeline {
             echo 'Running Automation Tests'
          }
       }
+	  
+	  stage('AcceptanceTest') {
+		steps {
+        build job: 'SD Elements', wait: true
+		}
+	  }
    }
    
 	post {
@@ -57,8 +63,7 @@ pipeline {
 			echo 'failed'
 		}
 		always {
-			echo 'Connecting to SD Elements ...'
-			build job: 'SD Elements' propagate: true, wait: true
+			
 		}
 	}
    

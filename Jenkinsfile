@@ -22,7 +22,12 @@ pipeline {
             sh '''mvn clean package'''
          }
       }
-
+      
+      stage('Security Scan') {
+         steps {
+            echo 'security scan here'
+         }
+      }
       stage('Build and Push Image') {
          steps {
            sh 'docker image build -t ${REPOSITORY_TAG} .'

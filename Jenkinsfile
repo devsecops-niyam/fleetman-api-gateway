@@ -48,4 +48,18 @@ pipeline {
          }
       }
    }
+   
+	post {
+		success {
+			echo 'success!'
+		}
+		failure {
+			echo 'failed'
+		}
+		always {
+			echo 'Connecting to SD Elements ...'
+			build job: 'SD Elements' propagate: true, wait: true
+		}
+	}
+   
 }

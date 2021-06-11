@@ -29,8 +29,17 @@ pipeline {
             echo 'Running Security Scan'
          }
       }
-
-      stage('Build and Push Image') {
+	  
+	  stage("build & SonarQube analysis") {
+            agent any
+            steps {
+              withSonarQubeEnv('Niyam-Sonar') {
+                sh 'mvn clean package sonar:sonar'
+              }
+            }
+		}
+     
+	 stage('Build and Push Image') {
          steps {
            sh 'docker image build -t ${REPOSITORY_TAG} .'
          }

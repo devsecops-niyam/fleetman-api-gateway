@@ -30,14 +30,6 @@ pipeline {
          }
       }
 	  
-	  stage("SonarQube analysis") {
-            agent any
-            steps {
-              withSonarQubeEnv('Niyam-Sonar') {
-                sh 'mvn clean sonar:sonar'
-              }
-            }
-		}
      
 	 stage('Build and Push Image') {
          steps {

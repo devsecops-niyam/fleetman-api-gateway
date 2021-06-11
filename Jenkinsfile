@@ -30,11 +30,11 @@ pipeline {
          }
       }
 	  
-	  stage("build & SonarQube analysis") {
+	  stage("SonarQube analysis") {
             agent any
             steps {
               withSonarQubeEnv('Niyam-Sonar') {
-                sh 'mvn clean package sonar:sonar'
+                sh 'mvn clean sonar:sonar'
               }
             }
 		}

@@ -20,12 +20,6 @@ pipeline {
             sh '''mvn clean package'''
          }
       }
-	  
-	  stage('SD Elements Check') {
-		steps {
-        build job: 'SD Elements', wait: true
-		}
-	  }
 
 	  stage('Static SonarQube Security Scan') {
          steps {
@@ -33,6 +27,12 @@ pipeline {
          }
       }
 	  
+	  	  
+	  stage('SD Elements Check') {
+		steps {
+        build job: 'SD Elements', wait: true
+		}
+	  }
      
 	 stage('Build and Push Dock Image') {
          steps {

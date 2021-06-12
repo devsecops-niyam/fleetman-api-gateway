@@ -27,7 +27,7 @@ pipeline {
 		}
 	  }
 
-	  stage('Static Security Scan') {
+	  stage('Static SonarQube Security Scan') {
          steps {
             echo 'Running Security Scan'
          }
@@ -52,7 +52,7 @@ pipeline {
          }
       }
 	  
-	  stage('Runtime Security Tests') {
+	  stage('Runtime WebInSpect Security Tests') {
          steps {
             echo 'Running Automation Tests'
          }
